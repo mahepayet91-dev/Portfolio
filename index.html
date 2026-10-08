@@ -258,7 +258,7 @@ main{position:relative;z-index:1}
 }
 .ecran iframe,.ecran video,.ecran img{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:contain;background:var(--noir)}
 /* ---------- projets ---------- */
-.filtres{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.filtres{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
 .filtres[hidden]{display:none}
 .filtre{
   height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--trait);background:rgb(255 255 255 / .04);
@@ -267,11 +267,13 @@ main{position:relative;z-index:1}
 .filtre:hover{border-color:rgb(255 255 255 / .45);color:var(--blanc)}
 .filtre[aria-pressed="true"]{background:var(--blanc);border-color:var(--blanc);color:var(--noir);box-shadow:0 0 24px rgb(var(--l) / .5)}
 
-.grille{--grand:3;--petit:2;display:grid;align-items:start;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(24px,3vw,42px) clamp(14px,1.8vw,26px)}
-.carte{grid-column:span var(--petit);display:block;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer}
-.grille.r2:not(.triee) .carte:nth-child(-n+2),.grille.r1:not(.triee) .carte:nth-child(-n+4),.grille.triee .carte{grid-column:span var(--grand)}
-.grille.seul .carte{grid-column:1 / -1}
-.grille.seul .cadre{aspect-ratio:21/9}
+/* deux fiches par ligne, dans un bloc centré ; une fiche seule sur sa ligne se centre aussi */
+.grille{
+  --ecart:clamp(16px,2vw,26px);
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:clamp(24px,3vw,38px) var(--ecart);
+  max-width:860px;margin-inline:auto;
+}
+.carte{flex:0 0 calc(50% - var(--ecart) / 2);min-width:0;display:block;padding:0;border:0;background:none;text-align:left;cursor:pointer}
 .carte[hidden]{display:none}
 .cadre{
   display:block;aspect-ratio:16/9;overflow:hidden;border-radius:18px;background:#05060a;
@@ -325,7 +327,15 @@ main{position:relative;z-index:1}
 .outil-nom{display:block;font-weight:600;font-size:1.15rem;line-height:1.2;color:var(--blanc)}
 .outil-usage{display:block;color:var(--gris);font-size:.92rem;margin-top:2px}
 .puces{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px}
-.puce{height:44px;padding:0 20px;border-radius:999px;display:inline-flex;align-items:center;border:1px solid var(--trait);background:rgb(255 255 255 / .04);color:var(--blanc)}
+.puce{height:46px;padding:0 20px 0 14px;border-radius:999px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--trait);background:rgb(255 255 255 / .04);color:var(--blanc)}
+.ico{flex:none;width:20px;height:20px;display:grid;place-items:center;color:var(--givre);filter:drop-shadow(0 0 5px rgb(var(--l) / .7))}
+.ico svg{width:20px;height:20px}
+.ico.roue{ /* roue de couleur, comme celles des logiciels d'étalonnage */
+  border-radius:50%;
+  background:conic-gradient(#ff5a5a,#ffd24d,#63f07e,#4dd9ff,#6f73ff,#ff5ad6,#ff5a5a);
+  -webkit-mask:radial-gradient(circle,transparent 30%,#000 33%);mask:radial-gradient(circle,transparent 30%,#000 33%);
+  filter:drop-shadow(0 0 5px rgb(255 255 255 / .35));
+}
 
 /* ---------- contact ---------- */
 .appel{color:var(--texte);font-size:1.15rem;max-width:46ch;text-wrap:balance;margin-bottom:clamp(18px,3vw,30px)}
@@ -403,7 +413,6 @@ main{position:relative;z-index:1}
 
 /* ---------- responsive ---------- */
 @media (max-width:980px){
-  .grille{--petit:3}
   .profil{grid-template-columns:1fr}
   .outils{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -411,7 +420,7 @@ main{position:relative;z-index:1}
   :root{--dock:52px}
   .haut-contact{display:none}
   .outil{padding:18px}
-  .grille{--petit:6;--grand:6}
+  .carte{flex-basis:100%}
   .lire{opacity:1}
   .cadre img{filter:none}
   .intro-pied{justify-content:center;text-align:center}
@@ -554,7 +563,8 @@ const SITE = {
 
   photo: "",           // optionnel : ton portrait, ex. "portrait.jpg"
 
-  // [nom, usage, sigle affiché dans le carré]
+  // Savoir-faire : icone = ciseaux, eclat, mouvement, roue, onde ou export (voir ICONES plus bas). Sans icone, le texte s'affiche seul.
+  // Logiciels : [nom, usage, sigle affiché dans le carré]
   logiciels: [
     ["Premiere Pro",    { fr: "Montage", en: "Editing" }, "Pr"],
     ["After Effects",   { fr: "Effets visuels, motion design", en: "Visual effects, motion design" }, "Ae"],
@@ -563,13 +573,12 @@ const SITE = {
   ],
 
   competences: [
-    { fr: "Montage", en: "Editing" },
-    { fr: "Effets visuels", en: "Visual effects" },
-    "Motion design",
-    { fr: "Étalonnage", en: "Color grading" },
-    { fr: "Optimisation audio", en: "Audio enhancement" },
-    { fr: "Cadrage", en: "Camera framing" },
-    { fr: "Exports et livrables", en: "Exports & deliverables" }
+    { fr: "Montage", en: "Editing", icone: "ciseaux" },
+    { fr: "Effets visuels", en: "Visual effects", icone: "eclat" },
+    { fr: "Motion design", en: "Motion design", icone: "mouvement" },
+    { fr: "Étalonnage", en: "Color grading", icone: "roue" },
+    { fr: "Optimisation audio", en: "Audio enhancement", icone: "onde" },
+    { fr: "Exports et livrables", en: "Exports & deliverables", icone: "export" }
   ],
 
   bio: [
@@ -709,13 +718,33 @@ const annee = new Date().getFullYear();
 $("#annee").textContent = annee;
 
 /* ---------- outils et savoir-faire ---------- */
+/* Icônes des savoir-faire : petits dessins au trait, tracés dans une grille de 24 x 24 */
+const TRAIT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">';
+const ICONES = {
+  ciseaux:   TRAIT + '<circle cx="6" cy="6" r="2.8"/><circle cx="6" cy="18" r="2.8"/><path d="M8.2 8 20 19.5M8.2 16 20 4.5"/></svg>',
+  eclat:     TRAIT + '<path d="M12 3c.7 5 3 7.3 9 9-6 1.7-8.3 4-9 9-.7-5-3-7.3-9-9 6-1.7 8.3-4 9-9z"/></svg>',
+  mouvement: TRAIT + '<path d="M15 6.5l5.5 5.5-5.5 5.5L9.5 12z"/><path d="M3 9h4.5M2 12h3.5M3 15h4.5"/></svg>',
+  roue:      " ",                      // roue de couleur dessinée en CSS (.ico.roue)
+  onde:      TRAIT + '<path d="M4 10v4M8 6.5v11M12 3v18M16 7.5v9M20 10v4"/></svg>',
+  export:    TRAIT + '<path d="M12 15V4M8 8l4-4 4 4M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>'
+};
 function rendreOutils() {
   $("#liste-outils").replaceChildren(...SITE.logiciels.map(([nom, usage, sigle]) =>
     el("li", { class: "outil verre suit" },
       el("span", { class: "sigle", "aria-hidden": "true", text: sigle || nom.slice(0, 2) }),
       el("span", {}, el("span", { class: "outil-nom", text: nom }), el("span", { class: "outil-usage", text: t(usage) }))
     )));
-  $("#puces").replaceChildren(...SITE.competences.map(c => el("li", { class: "puce", text: t(c) })));
+  $("#puces").replaceChildren(...SITE.competences.map(c => {
+    const li = el("li", { class: "puce" });
+    const dessin = c && ICONES[c.icone];
+    if (dessin) {
+      const ico = el("span", { class: "ico" + (c.icone === "roue" ? " roue" : ""), "aria-hidden": "true" });
+      ico.innerHTML = dessin;
+      li.append(ico);
+    }
+    li.append(t(c));
+    return li;
+  }));
 }
 
 /* ---------- projets ---------- */
@@ -740,7 +769,6 @@ $("#fermer").addEventListener("click", () => dialogue.close());
 const ROMAIN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 function rendreProjets() {
   const grille = $("#grille"), filtres = $("#filtres"), n = SITE.projets.length;
-  grille.className = "grille" + (n === 1 ? " seul" : n % 3 === 2 ? " r2" : n % 3 === 1 ? " r1" : "");
   grille.replaceChildren(...SITE.projets.map((p, i) => {
     const cadre = el("span", { class: "cadre suit" });
     const chiffre = () => el("span", { class: "couverture", style: "--fx:" + (18 + (i * 41) % 64) + "%", "aria-hidden": "true", text: ROMAIN[i] || String(i + 1) });
@@ -785,7 +813,6 @@ function rendreProjets() {
     b.addEventListener("click", () => {
       $$(".filtre", filtres).forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
       $$(".carte", grille).forEach(c => { c.hidden = !!type && c.dataset.type !== cle(type); });
-      grille.classList.toggle("triee", !!type);
     });
     filtres.append(b);
   });
