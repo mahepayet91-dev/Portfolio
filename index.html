@@ -192,9 +192,21 @@ main{position:relative;z-index:1}
   text-transform:uppercase;letter-spacing:.44em;text-indent:.44em;
   text-shadow:0 0 1em rgb(var(--l) / .7);
 }
+/* ce que je cherche, en évidence sous le rôle ; un clic mène au contact */
+.etat{margin-top:clamp(18px,3svh,28px)}
+.recherche{
+  display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:9px 18px 9px 14px;border-radius:18px;
+  border:1px solid rgb(255 255 255 / .28);background:rgb(255 255 255 / .07);color:var(--blanc);
+  font-size:clamp(.9rem,1.2vw,1.02rem);font-weight:500;line-height:1.3;text-align:left;text-decoration:none;text-wrap:balance;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 0 34px rgb(var(--l) / .22);
+  transition:border-color .25s,box-shadow .25s;
+}
+.recherche:hover{border-color:rgb(255 255 255 / .6);box-shadow:0 0 44px rgb(var(--l) / .45)}
+.voyant{flex:none;width:8px;height:8px;border-radius:50%;background:#6dffa0;box-shadow:0 0 10px #6dffa0}
 /* bouton vers les projets, façon autocollant « musique » sur une story */
 .autocollant{
-  display:inline-flex;align-items:center;gap:14px;margin-top:clamp(22px,4svh,40px);
+  display:inline-flex;align-items:center;gap:14px;margin-top:clamp(16px,2.6svh,26px);
   padding:8px 20px 8px 8px;border-radius:14px;text-align:left;text-decoration:none;color:var(--blanc);
   font-size:1rem;font-weight:500;line-height:1.3;
   background:rgb(8 10 15 / .5);border:1px solid var(--trait);
@@ -216,7 +228,7 @@ main{position:relative;z-index:1}
 /* allumage à l'ouverture de la page */
 .js .eclat{animation:allume 1.5s cubic-bezier(.2,.8,.2,1) .25s both,pulse 6s ease-in-out 1.8s infinite alternate}
 .js .nom{animation:revele 1.5s cubic-bezier(.2,.7,.2,1) .45s both}
-.js .role,.js .autocollant,.js .intro-pied{animation:fondu 1s ease 1.25s both}
+.js .role,.js .etat,.js .autocollant,.js .intro-pied{animation:fondu 1s ease 1.25s both}
 @keyframes allume{0%{opacity:0;transform:scale(0)}55%{opacity:1;transform:scale(1.35)}100%{opacity:1;transform:scale(1)}}
 @keyframes pulse{from{opacity:.78;transform:scale(.94)}to{opacity:1;transform:scale(1.06)}}
 @keyframes revele{from{opacity:0;filter:blur(18px);transform:translateY(14px)}}
@@ -246,7 +258,7 @@ main{position:relative;z-index:1}
   margin-bottom:.5em;text-shadow:var(--halo-titre);
 }
 
-/* reflet : une bande de lumière blanche traverse le nom et les titres de gauche à droite */
+/* reflet : une bande de lumière blanche traverse le nom de gauche à droite */
 .brille{position:relative}
 .brille::after{
   content:attr(data-texte);content:attr(data-texte) / "";
@@ -456,7 +468,7 @@ main{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .grain,.brume i,.dock-rec{animation:none}
-  .js .eclat,.js .nom,.js .role,.js .autocollant,.js .intro-pied{animation:none}
+  .js .eclat,.js .nom,.js .role,.js .etat,.js .autocollant,.js .intro-pied{animation:none}
   .torche{display:none}
   .astre{transform:none}
   .brille::after{display:none}
@@ -491,19 +503,20 @@ main{position:relative;z-index:1}
         <h1 class="nom brille" data-champ="nom">Mahé Payet</h1>
       </div>
       <p class="role" data-champ="role">Monteur VFX</p>
+      <p class="etat"><a class="recherche" href="#contact"><span class="voyant" aria-hidden="true"></span><span data-champ="statut"></span></a></p>
       <a class="autocollant" href="#projets">
         <span class="pochette" aria-hidden="true"></span>
         <span><span data-t="voirProjets">Voir mes projets</span><small data-champ="nom">Mahé Payet</small></span>
       </a>
     </div>
     <div class="intro-pied">
-      <span data-champ="statut"></span>
+      <span data-champ="ecole"></span>
       <span data-champ="lieu"></span>
     </div>
   </section>
 
   <section class="seq" id="projets">
-    <h2 class="titre brille" data-t="tProjets">Projets</h2>
+    <h2 class="titre" data-t="tProjets">Projets</h2>
     <div class="corps">
       <div class="filtres" id="filtres" role="group"></div>
       <div class="grille" id="grille"></div>
@@ -511,7 +524,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="outils">
-    <h2 class="titre brille" data-t="tOutils">Outils</h2>
+    <h2 class="titre" data-t="tOutils">Outils</h2>
     <div class="corps">
       <ul class="outils" id="liste-outils"></ul>
       <h3 class="sous-titre" data-t="savoirFaire">Savoir-faire</h3>
@@ -520,7 +533,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="profil">
-    <h2 class="titre brille" data-t="tProfil">Profil</h2>
+    <h2 class="titre" data-t="tProfil">Profil</h2>
     <div class="corps">
       <div class="profil">
         <div class="bio" id="bio"></div>
@@ -530,7 +543,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="contact">
-    <h2 class="titre brille" data-t="tContact">Contact</h2>
+    <h2 class="titre" data-t="tContact">Contact</h2>
     <div class="corps">
       <p class="appel" data-champ="appel"></p>
       <a class="mail" id="mail" href="mailto:"></a>
@@ -579,6 +592,7 @@ const SITE = {
   nom: "Mahé Payet",
   role:   { fr: "Monteur VFX", en: "VFX Editor" },
   statut: { fr: "Recherche un stage et une alternance pour septembre 2027", en: "Looking for an internship and a work-study position for September 2027" },
+  ecole:  { fr: "Étudiant en Bachelor Montage VFX à l'EICAR", en: "Bachelor student in Editing & VFX at EICAR" },
   lieu: "Paris, France",
   email: "mahpay78@gmail.com",
   appel:  { fr: "Je cherche un stage et une alternance pour septembre 2027. Un projet à monter d'ici là ? Écris-moi.",
@@ -628,16 +642,21 @@ const SITE = {
   ],
 
   // Colle tes liens YouTube dans video : la vignette de la vidéo s'affiche toute seule.
-  // Pour une autre vignette, mets le nom d'une image (placée à côté de ce fichier) dans image.
+  // Pour choisir la vignette :
+  //   miniature: 1, 2 ou 3  = une des trois autres images que YouTube tire de la vidéo
+  //   zoom: 1.34            = agrandit l'image (1.34 fait disparaître les bandes noires d'une vidéo 4:3)
+  //   position: "50% 30%"   = point de l'image qui reste en place pendant le zoom (horizontal, vertical)
+  //   image: "fichier.jpg"  = ta propre image, placée à côté de ce fichier
   projets: [
-    { titre: { fr: "Court-métrage", en: "Short film" }, client: "EICAR", annee: "2026",
-      type: { fr: "Court-métrage", en: "Short film" }, role: { fr: "Chef monteur", en: "Lead editor" }, image: "", video: "https://youtu.be/jxOdFFDVE_U" },
+    { titre: "Maison en feu VFX", client: "", annee: "",
+      type: { fr: "Effets visuels", en: "Visual effects" }, role: "", image: "", video: "https://youtu.be/zTY0_nYMF-E" },
+    { titre: "Maneater", client: "EICAR", annee: "2026",
+      type: { fr: "Court-métrage", en: "Short film" }, role: { fr: "Chef monteur", en: "Lead editor" },
+      image: "", miniature: 1, zoom: 1.34, position: "50% 30%", video: "https://youtu.be/jxOdFFDVE_U" },
     { titre: "Flackle", client: "", annee: "",
       type: { fr: "Publicité", en: "Advertising" }, role: "", image: "", video: "https://youtu.be/j3vXWHo_tbQ" },
     { titre: "Wish", client: "", annee: "2026",
-      type: "Motion design", role: "Motion design", image: "", video: "https://www.youtube.com/shorts/BE1WdvkliZ0" },
-    { titre: "Maison en feu VFX", client: "", annee: "",
-      type: { fr: "Effets visuels", en: "Visual effects" }, role: "", image: "", video: "https://youtu.be/zTY0_nYMF-E" }
+      type: "Motion design", role: "Motion design", image: "vignette-wish.jpg", video: "https://www.youtube.com/shorts/BE1WdvkliZ0" }
   ]
 };
 
@@ -710,8 +729,7 @@ function media(url) {
   if (!url) return null;
   let m;
   if ((m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{6,})/)))
-    return { type: "iframe", nom: "YouTube", lien: "https://www.youtube.com/watch?v=" + m[1],
-             vignette: "https://i.ytimg.com/vi/" + m[1] + "/maxresdefault.jpg", vignetteSecours: "https://i.ytimg.com/vi/" + m[1] + "/hqdefault.jpg", src: "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0" };
+    return { type: "iframe", nom: "YouTube", id: m[1], lien: "https://www.youtube.com/watch?v=" + m[1], src: "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0" };
   if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
     return { type: "iframe", nom: "Vimeo", lien: "https://vimeo.com/" + m[1], src: "https://player.vimeo.com/video/" + m[1] + "?autoplay=1" };
   return { type: "video", src: url };
@@ -818,19 +836,19 @@ function rendreProjets() {
   grille.replaceChildren(...SITE.projets.map((p, i) => {
     const cadre = el("span", { class: "cadre suit" });
     const chiffre = () => el("span", { class: "couverture", style: "--fx:" + (18 + (i * 41) % 64) + "%", "aria-hidden": "true", text: ROMAIN[i] || String(i + 1) });
-    // Vignette : l'image indiquée, sinon celle de la vidéo YouTube, sinon un chiffre lumineux
+    // Vignette : l'image indiquée, sinon celle de la vidéo YouTube (grande puis petite), sinon un chiffre lumineux
     const m = media(p.video);
-    const source = p.image || (m && m.vignette);
-    if (source) {
-      const img = el("img", { src: source, alt: "" });   // chargée dès l'ouverture de la page, pour être prête avant le scroll
-      if (!p.image) {
-        const secours = () => {
-          if (img.dataset.secours) { img.replaceWith(chiffre()); return; }
-          img.dataset.secours = "1"; img.src = m.vignetteSecours;
-        };
-        img.addEventListener("error", secours);
-        img.addEventListener("load", () => { if (img.naturalWidth <= 120) secours(); });   // 120 px = image « vidéo introuvable » de YouTube
-      }
+    const yt = m && m.id ? "https://i.ytimg.com/vi/" + m.id + "/" : "";
+    const n = p.miniature ? String(p.miniature) : "default";
+    const sources = [p.image, yt && yt + "maxres" + n + ".jpg", yt && yt + "hq" + n + ".jpg"].filter(Boolean);
+    if (sources.length) {
+      let k = 0;
+      const img = el("img", { src: sources[0], alt: "" });   // chargée dès l'ouverture de la page, pour être prête avant le scroll
+      const suivante = () => { k++; if (k < sources.length) img.src = sources[k]; else img.replaceWith(chiffre()); };
+      img.addEventListener("error", suivante);
+      img.addEventListener("load", () => { if (img.naturalWidth <= 120) suivante(); });   // 120 px = image « vidéo introuvable » de YouTube
+      if (p.zoom) img.style.transform = "scale(" + p.zoom + ")";
+      if (p.position) img.style.transformOrigin = p.position;
       cadre.append(img);
     } else cadre.append(chiffre());
     cadre.append(el("span", { class: "lire", "aria-hidden": "true", text: t(UI.lire) }));
