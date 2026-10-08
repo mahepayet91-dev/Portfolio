@@ -991,20 +991,22 @@ const clips = sections.map(s => {
   }
 })();
 
-/* ---------- fondu au défilement : chaque bloc apparaît quand il entre dans l'écran ---------- */
+/* ---------- fondu au défilement : chaque bloc apparaît quand il entre dans l'écran ----------
+   Sécurité : les blocs ne sont masqués qu'après la première réponse de l'observateur.
+   Si le navigateur ne répond pas (onglet inactif, aperçu, vieux navigateur), tout reste visible. */
 (function () {
   if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion:reduce)").matches) return;
   const blocs = $$(".titre, #filtres, #grille, #liste-outils, .sous-titre, #puces, .profil, .appel, #mail, .contact-actions, .pied");
-  blocs.forEach(b => b.setAttribute("data-fondu", ""));
-  document.documentElement.classList.add("anim");
+  let actif = false;
   const veille = new IntersectionObserver(entrees => {
     entrees.forEach(e => {
       if (!e.isIntersecting) return;
       e.target.classList.add("vu");
       veille.unobserve(e.target);                            // une fois apparu, le bloc reste affiché
     });
+    if (!actif) { actif = true; document.documentElement.classList.add("anim"); }
   }, { threshold: .01, rootMargin: "0px 0px -8% 0px" });
-  blocs.forEach(b => veille.observe(b));
+  blocs.forEach(b => { b.setAttribute("data-fondu", ""); veille.observe(b); });
 })();
 
 /* ---------- tout afficher dans la langue choisie ---------- */
