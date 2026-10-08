@@ -728,7 +728,7 @@ function rendreProjets() {
     const m = media(p.video);
     const source = p.image || (m && m.vignette);
     if (source) {
-      const img = el("img", { src: source, alt: "", loading: "lazy" });
+      const img = el("img", { src: source, alt: "" });   // chargée dès l'ouverture de la page, pour être prête avant le scroll
       if (!p.image) {
         const secours = () => {
           if (img.dataset.secours) { img.replaceWith(chiffre()); return; }
