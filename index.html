@@ -21,7 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400..700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
@@ -35,9 +35,11 @@
   --rec:#ff2d3f;
   --trait:rgb(255 255 255 / .1);
 
-  --script:"Pinyon Script","Snell Roundhand","Edwardian Script ITC","Apple Chancery",cursive;
+  --titre:"Unbounded","Geist","Helvetica Neue",Arial,sans-serif;
   --sans:"Geist","Helvetica Neue",Arial,sans-serif;
 
+  --halo-titre:0 0 .05em rgb(255 255 255 / .5),0 0 .32em rgb(var(--l) / .45),0 0 1em rgb(var(--l) / .26);
+  --acier:#d3daea;                     /* teinte du nom et des titres, juste sous le blanc pour que le reflet se voie */
   --halo:0 0 .05em rgb(255 255 255 / .95),0 0 .22em rgb(var(--l) / .7),0 0 .7em rgb(var(--l) / .42),0 0 1.8em rgb(var(--l) / .24);
   --marge:clamp(16px,4.5vw,64px);
   --dock:58px;
@@ -118,7 +120,7 @@ main{position:relative;z-index:1}
   transition:border-color .25s,box-shadow .25s;
 }
 .pastille:hover{border-color:rgb(255 255 255 / .42);box-shadow:0 0 30px rgb(var(--l) / .38)}
-.haut-nom{font-family:var(--script);font-size:1.7rem;line-height:1;padding-top:5px;text-shadow:0 0 .4em rgb(var(--l) / .8)}
+.haut-nom{font-family:var(--titre);font-size:.92rem;font-weight:500;letter-spacing:-.02em;line-height:1;text-shadow:0 0 .6em rgb(var(--l) / .7)}
 .haut-contact{font-size:.92rem;font-weight:500}
 .haut-droite{display:flex;align-items:center;gap:8px}
 .langue{
@@ -166,9 +168,9 @@ main{position:relative;z-index:1}
 
 .intro-centre{align-self:center;padding-top:clamp(20px,6svh,70px)}
 .nom{
-  font-family:var(--script);font-weight:400;color:var(--blanc);
-  font-size:clamp(4.4rem,16.5vw,15.5rem);line-height:1;
-  padding:.14em .08em 0;text-shadow:var(--halo);
+  font-family:var(--titre);font-weight:500;color:var(--acier);
+  font-size:clamp(2.8rem,11.5vw,10.5rem);line-height:1.02;letter-spacing:-.035em;
+  margin-top:.1em;text-shadow:var(--halo-titre);
 }
 .role{
   margin-top:.9em;color:var(--blanc);
@@ -221,12 +223,29 @@ main{position:relative;z-index:1}
 }
 .bouton.clair:hover{border-color:rgb(255 255 255 / .45);box-shadow:0 0 36px rgb(var(--l) / .4)}
 
-/* ---------- sections : titre en script, au-dessus du contenu ---------- */
+/* ---------- sections : titre au-dessus du contenu ---------- */
 .seq{position:relative;padding:clamp(84px,15vh,170px) var(--marge) 0}
 .titre{
-  font-family:var(--script);font-weight:400;color:var(--blanc);
-  font-size:clamp(3.8rem,9vw,7rem);line-height:1.05;
-  margin-bottom:.32em;text-shadow:var(--halo);
+  width:fit-content;
+  font-family:var(--titre);font-weight:500;color:var(--acier);
+  font-size:clamp(2.4rem,6.2vw,5rem);line-height:1.05;letter-spacing:-.03em;
+  margin-bottom:.5em;text-shadow:var(--halo-titre);
+}
+
+/* reflet : une bande de lumière blanche traverse le nom et les titres de gauche à droite */
+.brille{position:relative}
+.brille::after{
+  content:attr(data-texte);content:attr(data-texte) / "";
+  position:absolute;inset:-.4em;padding:.4em;pointer-events:none;
+  color:var(--blanc);text-shadow:0 0 .08em #fff,0 0 .3em rgb(var(--l) / .9);
+  -webkit-mask:linear-gradient(105deg,transparent 41%,#000 50%,transparent 59%) 100% 0 / 300% 100% no-repeat;
+          mask:linear-gradient(105deg,transparent 41%,#000 50%,transparent 59%) 100% 0 / 300% 100% no-repeat;
+  animation:reflet 6s cubic-bezier(.45,0,.2,1) infinite;
+}
+.nom.brille::after{animation-delay:1.9s}
+@keyframes reflet{
+  0%{-webkit-mask-position:100% 0;mask-position:100% 0}
+  30%,100%{-webkit-mask-position:0% 0;mask-position:0% 0}
 }
 .sous-titre{font-size:1rem;font-weight:500;color:var(--gris);margin:clamp(44px,7vh,76px) 0 16px}
 .sous-titre:first-child{margin-top:0}
@@ -408,6 +427,7 @@ main{position:relative;z-index:1}
   .js .eclat,.js .nom,.js .role,.js .autocollant,.js .intro-pied{animation:none}
   .torche{display:none}
   .astre{transform:none}
+  .brille::after{display:none}
 }
 </style>
 <script>document.documentElement.classList.add('js')</script>
@@ -434,7 +454,7 @@ main{position:relative;z-index:1}
     <div class="intro-centre">
       <div class="enseigne">
         <div class="astre" aria-hidden="true"><div class="eclat"><i></i><i></i><i></i></div></div>
-        <h1 class="nom" data-champ="nom">Mahé Payet</h1>
+        <h1 class="nom brille" data-champ="nom">Mahé Payet</h1>
       </div>
       <p class="role" data-champ="role">Monteur VFX</p>
       <a class="autocollant" href="#projets">
@@ -449,7 +469,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="projets">
-    <h2 class="titre" data-t="tProjets">Projets</h2>
+    <h2 class="titre brille" data-t="tProjets">Projets</h2>
     <div class="corps">
       <div class="filtres" id="filtres" role="group"></div>
       <div class="grille" id="grille"></div>
@@ -457,7 +477,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="outils">
-    <h2 class="titre" data-t="tOutils">Outils</h2>
+    <h2 class="titre brille" data-t="tOutils">Outils</h2>
     <div class="corps">
       <ul class="outils" id="liste-outils"></ul>
       <h3 class="sous-titre" data-t="savoirFaire">Savoir-faire</h3>
@@ -466,7 +486,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="profil">
-    <h2 class="titre" data-t="tProfil">Profil</h2>
+    <h2 class="titre brille" data-t="tProfil">Profil</h2>
     <div class="corps">
       <div class="profil">
         <div class="bio" id="bio"></div>
@@ -476,7 +496,7 @@ main{position:relative;z-index:1}
   </section>
 
   <section class="seq" id="contact">
-    <h2 class="titre" data-t="tContact">Contact</h2>
+    <h2 class="titre brille" data-t="tContact">Contact</h2>
     <div class="corps">
       <p class="appel" data-champ="appel"></p>
       <a class="mail" id="mail" href="mailto:"></a>
@@ -918,6 +938,7 @@ function rendre() {
   const d = $('meta[name="description"]'); if (d) d.content = t(UI.description);
   $$("[data-champ]").forEach(n => { n.textContent = t(SITE[n.dataset.champ]); });
   $$("[data-t]").forEach(n => { n.textContent = t(UI[n.dataset.t]); });
+  $$(".brille").forEach(n => { n.dataset.texte = n.textContent; });        // texte du reflet
   $$(".langue button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANG ? "true" : "false"));
   $("#dock").setAttribute("aria-label", t(UI.dock));
   clips.forEach((a, i) => { a.textContent = t(UI.clips[sections[i].id]) || sections[i].id; });
