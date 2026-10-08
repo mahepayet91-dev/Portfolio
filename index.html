@@ -7,10 +7,16 @@
 <meta name="theme-color" content="#000000">
 
 <title>Mahé Payet, monteur VFX</title>
-<meta name="description" content="Portfolio de Mahé Payet, monteur VFX : showreel, courts-métrages, effets visuels et motion design.">
+<meta name="description" content="Portfolio de Mahé Payet, monteur VFX : courts-métrages, publicité, effets visuels et motion design.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mahé Payet, monteur VFX">
-<meta property="og:description" content="Showreel, courts-métrages, effets visuels et motion design.">
+<meta property="og:description" content="Courts-métrages, publicité, effets visuels et motion design.">
+<!-- Image affichée quand le lien est partagé (LinkedIn, WhatsApp, Discord…). Si l'adresse du site change, change-la ici aussi. -->
+<meta property="og:url" content="https://mahepayet91-dev.github.io/Portfolio/">
+<meta property="og:image" content="https://mahepayet91-dev.github.io/Portfolio/apercu.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7'/%3E%3Cpath d='M16 3c1 9 4 12 13 13-9 1-12 4-13 13-1-9-4-12-13-13 9-1 12-4 13-13z' fill='%23fff'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,7 +178,7 @@ main{position:relative;z-index:1}
   text-transform:uppercase;letter-spacing:.44em;text-indent:.44em;
   text-shadow:0 0 1em rgb(var(--l) / .7);
 }
-/* bouton showreel, façon autocollant « musique » sur une story */
+/* bouton vers les projets, façon autocollant « musique » sur une story */
 .autocollant{
   display:inline-flex;align-items:center;gap:14px;margin-top:clamp(22px,4svh,40px);
   padding:8px 20px 8px 8px;border-radius:14px;text-align:left;text-decoration:none;color:var(--blanc);
@@ -186,7 +192,7 @@ main{position:relative;z-index:1}
   flex:none;width:46px;height:46px;border-radius:8px;background:var(--blanc);display:grid;place-items:center;
   box-shadow:0 0 22px rgb(var(--l) / .75);
 }
-.pochette::after{content:"";border-left:13px solid var(--noir);border-block:8px solid transparent;margin-left:3px}
+.pochette::after{content:"";border-top:13px solid var(--noir);border-inline:8px solid transparent;margin-top:3px}
 .autocollant small{display:block;font-size:inherit;color:var(--gris)}
 .intro-pied{
   display:flex;justify-content:space-between;gap:10px 28px;flex-wrap:wrap;
@@ -217,18 +223,12 @@ main{position:relative;z-index:1}
 }
 .bouton.clair:hover{border-color:rgb(255 255 255 / .45);box-shadow:0 0 36px rgb(var(--l) / .4)}
 
-/* ---------- sections : titre vertical en script ---------- */
-.seq{
-  position:relative;
-  display:grid;grid-template-columns:clamp(84px,11vw,150px) minmax(0,1fr);column-gap:clamp(16px,3vw,48px);
-  padding:clamp(84px,15vh,170px) var(--marge) 0;
-}
+/* ---------- sections : titre en script, au-dessus du contenu ---------- */
+.seq{position:relative;padding:clamp(84px,15vh,170px) var(--marge) 0}
 .titre{
-  position:sticky;top:84px;align-self:start;justify-self:center;
-  writing-mode:vertical-rl;white-space:nowrap;
   font-family:var(--script);font-weight:400;color:var(--blanc);
-  font-size:clamp(4.4rem,8vw,7.4rem);line-height:1.2;
-  padding-block:.08em;text-shadow:var(--halo);
+  font-size:clamp(3.8rem,9vw,7rem);line-height:1.05;
+  margin-bottom:.32em;text-shadow:var(--halo);
 }
 .sous-titre{font-size:1rem;font-weight:500;color:var(--gris);margin:clamp(44px,7vh,76px) 0 16px}
 .sous-titre:first-child{margin-top:0}
@@ -267,11 +267,11 @@ main{position:relative;z-index:1}
 .filtre:hover{border-color:rgb(255 255 255 / .45);color:var(--blanc)}
 .filtre[aria-pressed="true"]{background:var(--blanc);border-color:var(--blanc);color:var(--noir);box-shadow:0 0 24px rgb(var(--l) / .5)}
 
-.grille{--grand:3;--petit:2;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(24px,3vw,42px) clamp(14px,1.8vw,26px)}
+.grille{--grand:3;--petit:2;display:grid;align-items:start;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(24px,3vw,42px) clamp(14px,1.8vw,26px)}
 .carte{grid-column:span var(--petit);display:block;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer}
-.grille.r2:not(.triee) .carte:nth-child(-n+2),.grille.triee .carte{grid-column:span var(--grand)}
-.grille.r1:not(.triee) .carte:first-child{grid-column:1 / -1}
-.grille.r1:not(.triee) .carte:first-child .cadre{aspect-ratio:21/9}
+.grille.r2:not(.triee) .carte:nth-child(-n+2),.grille.r1:not(.triee) .carte:nth-child(-n+4),.grille.triee .carte{grid-column:span var(--grand)}
+.grille.seul .carte{grid-column:1 / -1}
+.grille.seul .cadre{aspect-ratio:21/9}
 .carte[hidden]{display:none}
 .cadre{
   display:block;aspect-ratio:16/9;overflow:hidden;border-radius:18px;background:#05060a;
@@ -314,7 +314,7 @@ main{position:relative;z-index:1}
 .fiche div:last-child{border-bottom:0}
 .fiche dt{color:var(--gris);flex:none}
 .fiche dd{color:var(--blanc);text-align:right}
-.outils{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:clamp(12px,1.6vw,20px)}
+.outils{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
 .outil{padding:22px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;transition:border-color .3s,box-shadow .3s}
 .outil:hover{border-color:rgb(255 255 255 / .4);box-shadow:inset 0 1px 0 rgb(255 255 255 / .09),0 0 50px rgb(var(--l) / .2)}
 .sigle{
@@ -396,18 +396,11 @@ main{position:relative;z-index:1}
 @media (max-width:980px){
   .grille{--petit:3}
   .profil{grid-template-columns:1fr}
-}
-@media (max-width:820px){
-  .seq{grid-template-columns:minmax(0,1fr)}
-  .titre{
-    position:static;writing-mode:horizontal-tb;justify-self:start;
-    font-size:clamp(3.8rem,17vw,6rem);line-height:1.05;padding:0;margin-bottom:.3em;
-  }
+  .outils{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:620px){
   :root{--dock:52px}
   .haut-contact{display:none}
-  .outils{grid-template-columns:repeat(2,minmax(0,1fr))}
   .outil{padding:18px}
   .grille{--petit:6;--grand:6}
   .lire{opacity:1}
@@ -454,20 +447,15 @@ main{position:relative;z-index:1}
         <h1 class="nom" data-champ="nom">Mahé Payet</h1>
       </div>
       <p class="role" data-champ="role">Monteur VFX</p>
-      <a class="autocollant" href="#showreel">
+      <a class="autocollant" href="#projets">
         <span class="pochette" aria-hidden="true"></span>
-        <span><span data-t="lireShowreel">Lire le showreel</span><small data-champ="nom">Mahé Payet</small></span>
+        <span><span data-t="voirProjets">Voir mes projets</span><small data-champ="nom">Mahé Payet</small></span>
       </a>
     </div>
     <div class="intro-pied">
       <span data-champ="statut"></span>
       <span data-champ="lieu"></span>
     </div>
-  </section>
-
-  <section class="seq" id="showreel">
-    <h2 class="titre" data-t="tShowreel">Showreel</h2>
-    <div class="corps"><div class="ecran" id="reel"></div></div>
   </section>
 
   <section class="seq" id="outils">
@@ -546,23 +534,21 @@ main{position:relative;z-index:1}
 const SITE = {
   nom: "Mahé Payet",
   role:   { fr: "Monteur VFX", en: "VFX Editor" },
-  statut: { fr: "Étudiant en Bachelor Montage VFX à l'EICAR", en: "Bachelor student in Editing & VFX at EICAR" },
+  statut: { fr: "Recherche un stage et une alternance pour septembre 2027", en: "Looking for an internship and a work-study position for September 2027" },
   lieu: "Paris, France",
   email: "mahpay78@gmail.com",
-  appel:  { fr: "Un court-métrage à monter, un clip, une vidéo pour tes réseaux ? Écris-moi.",
-            en: "A short film to cut, a music video, a video for your socials? Write to me." },
+  appel:  { fr: "Je cherche un stage et une alternance pour septembre 2027. Un projet à monter d'ici là ? Écris-moi.",
+            en: "I'm looking for an internship and a work-study position for September 2027. A project to cut before then? Write to me." },
   telephone: "",       // laissé vide exprès : un numéro sur un site public attire le démarchage
   cv: "",              // ex. "cv-mahe-payet.pdf", ou { fr: "cv-fr.pdf", en: "cv-en.pdf" }
 
-  showreel: "",        // ex. "https://vimeo.com/123456789" ou "showreel.mp4"
   photo: "",           // optionnel : ton portrait, ex. "portrait.jpg"
 
   // [nom, usage, sigle affiché dans le carré]
   logiciels: [
     ["Premiere Pro",    { fr: "Montage", en: "Editing" }, "Pr"],
     ["After Effects",   { fr: "Effets visuels, motion design", en: "Visual effects, motion design" }, "Ae"],
-    ["DaVinci Resolve", { fr: "Post-production", en: "Post-production" }, "Dr"],
-    ["Nuke",            "Compositing", "Nk"],
+    ["DaVinci Resolve", { fr: "Étalonnage", en: "Color grading" }, "Dr"],
     ["Blender",         "3D", "Bl"]
   ],
 
@@ -579,48 +565,50 @@ const SITE = {
   bio: [
     { fr: "Je m'appelle Mahé, je suis monteur et étudiant en Bachelor Montage VFX à l'EICAR. Montage, effets visuels, motion design : je travaille l'image du court-métrage à la vidéo pensée pour les réseaux.",
       en: "I'm Mahé, an editor and a Bachelor student in Editing & VFX at EICAR. Editing, visual effects, motion design: I shape the image, from short films to videos made for social media." },
-    { fr: "Chef monteur sur trois courts-métrages indépendants, j'ai géré toute la post-production image, de la sélection des rushs aux livrables finaux, en lien direct avec les réalisateurs et l'équipe son.",
-      en: "As lead editor on three independent short films, I handled the whole picture post-production, from selecting the rushes to the final deliverables, working directly with the directors and the sound team." }
+    { fr: "Chef monteur sur des courts-métrages indépendants, j'ai géré toute la post-production image, de la sélection des rushs aux livrables finaux, en lien direct avec les réalisateurs et l'équipe son.",
+      en: "As lead editor on independent short films, I handled the whole picture post-production, from selecting the rushes to the final deliverables, working directly with the directors and the sound team." }
   ],
 
   fiche: [
     [{ fr: "Basé à", en: "Based in" }, "Paris"],
     [{ fr: "Formation", en: "Education" }, { fr: "Bachelor Montage VFX, EICAR", en: "Bachelor in Editing & VFX, EICAR" }],
-    [{ fr: "Langues", en: "Languages" }, { fr: "Français, anglais", en: "French, English" }]
+    [{ fr: "Langues", en: "Languages" }, { fr: "Français, anglais", en: "French, English" }],
+    [{ fr: "Recherche", en: "Looking for" }, { fr: "Stage et alternance, septembre 2027", en: "Internship and work-study, September 2027" }]
   ],
 
   reseaux: [
-    ["Instagram", ""],   // ex. "https://instagram.com/tonpseudo"
+    ["Instagram", "https://www.instagram.com/mahe_.p/"],
     ["Vimeo", ""],
     ["YouTube", ""],
     ["LinkedIn", ""]
   ],
 
-  // Remplace « Court-métrage » par le vrai titre, puis colle tes liens YouTube dans video
-  // (et, si tu veux une vignette, le nom d'une image dans image).
+  // Colle tes liens YouTube dans video : la vignette de la vidéo s'affiche toute seule.
+  // Pour une autre vignette, mets le nom d'une image (placée à côté de ce fichier) dans image.
   projets: [
     { titre: { fr: "Court-métrage", en: "Short film" }, client: "EICAR", annee: "2026",
       type: { fr: "Court-métrage", en: "Short film" }, role: { fr: "Chef monteur", en: "Lead editor" }, image: "", video: "" },
-    { titre: { fr: "Vidéo promotionnelle", en: "Promotional video" }, client: "", annee: "",
+    { titre: "Flackle", client: "", annee: "",
       type: { fr: "Publicité", en: "Advertising" }, role: "", image: "", video: "https://youtu.be/j3vXWHo_tbQ" },
     { titre: "Wish", client: "", annee: "2026",
-      type: "Motion design", role: "Motion design", image: "", video: "https://www.youtube.com/shorts/BE1WdvkliZ0" }
+      type: "Motion design", role: "Motion design", image: "", video: "https://www.youtube.com/shorts/BE1WdvkliZ0" },
+    // Fiche VFX : colle ton lien YouTube dans video, et change le titre si tu veux.
+    { titre: { fr: "Effets visuels", en: "Visual effects" }, client: "", annee: "",
+      type: { fr: "Effets visuels", en: "Visual effects" }, role: "", image: "", video: "" }
   ]
 };
 
 /* Textes de l'interface, dans les deux langues */
 const UI = {
   titrePage:   { fr: "monteur VFX", en: "VFX editor" },
-  description: { fr: "Portfolio de Mahé Payet, monteur VFX : showreel, courts-métrages, effets visuels et motion design.",
-                 en: "Portfolio of Mahé Payet, VFX editor: showreel, short films, visual effects and motion design." },
+  description: { fr: "Portfolio de Mahé Payet, monteur VFX : courts-métrages, publicité, effets visuels et motion design.",
+                 en: "Portfolio of Mahé Payet, VFX editor: short films, advertising, visual effects and motion design." },
   contacter:    { fr: "Me contacter", en: "Contact me" },
-  lireShowreel: { fr: "Lire le showreel", en: "Play the showreel" },
-  bientotReel:  { fr: "Showreel bientôt en ligne", en: "Showreel coming soon" },
+  voirProjets:  { fr: "Voir mes projets", en: "See my work" },
   bientotVideo: { fr: "Vidéo bientôt en ligne", en: "Video coming soon" },
   horsLigne:    { fr: "Le lecteur intégré est bloqué tant que le site n'est pas en ligne.",
                   en: "The embedded player is blocked until the site is online." },
   voirSur:      { fr: "Voir sur ", en: "Watch on " },
-  tShowreel: "Showreel",
   tOutils:   { fr: "Outils", en: "Tools" },
   tProjets:  { fr: "Projets", en: "Projects" },
   tProfil:   { fr: "Profil", en: "Profile" },
@@ -635,10 +623,9 @@ const UI = {
   cv:      { fr: "Télécharger mon CV", en: "Download my résumé" },
   fin:     { fr: "Fin de bobine", en: "End of reel" },
   portrait:{ fr: "Portrait de ", en: "Portrait of " },
-  showreelDe: { fr: "Showreel de ", en: "Showreel by " },
   dock:    { fr: "Timeline : cliquer ou glisser pour naviguer", en: "Timeline: click or drag to navigate" },
   clips: {
-    intro: "Intro", showreel: "Showreel",
+    intro: "Intro",
     outils:  { fr: "Outils", en: "Tools" },
     projets: { fr: "Projets", en: "Projects" },
     profil:  { fr: "Profil", en: "Profile" },
@@ -680,7 +667,8 @@ function media(url) {
   if (!url) return null;
   let m;
   if ((m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{6,})/)))
-    return { type: "iframe", nom: "YouTube", lien: "https://www.youtube.com/watch?v=" + m[1], src: "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0" };
+    return { type: "iframe", nom: "YouTube", lien: "https://www.youtube.com/watch?v=" + m[1],
+             vignette: "https://i.ytimg.com/vi/" + m[1] + "/maxresdefault.jpg", vignetteSecours: "https://i.ytimg.com/vi/" + m[1] + "/hqdefault.jpg", src: "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0" };
   if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
     return { type: "iframe", nom: "Vimeo", lien: "https://vimeo.com/" + m[1], src: "https://player.vimeo.com/video/" + m[1] + "?autoplay=1" };
   return { type: "video", src: url };
@@ -710,20 +698,6 @@ document.addEventListener("securitypolicyviolation", e => {
 
 const annee = new Date().getFullYear();
 $("#annee").textContent = annee;
-
-/* ---------- showreel ---------- */
-function rendreShowreel() {
-  const ecran = $("#reel");
-  if (ecran.querySelector("iframe,video")) return;          // lecture en cours : on n'y touche pas
-  const m = media(SITE.showreel);
-  const facade = el("button", { class: "facade", type: "button" },
-    el("span", { class: "rond", "aria-hidden": "true" }),
-    el("span", { class: "facade-texte", text: m ? t(UI.lireShowreel) + " " + annee : t(UI.bientotReel) })
-  );
-  if (m) facade.addEventListener("click", () => ecran.replaceChildren(lecteurPour(m, t(UI.showreelDe) + SITE.nom)));
-  else facade.disabled = true;
-  ecran.replaceChildren(facade);
-}
 
 /* ---------- outils et savoir-faire ---------- */
 function rendreOutils() {
@@ -757,11 +731,25 @@ $("#fermer").addEventListener("click", () => dialogue.close());
 const ROMAIN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 function rendreProjets() {
   const grille = $("#grille"), filtres = $("#filtres"), n = SITE.projets.length;
-  grille.className = "grille" + (n % 3 === 2 ? " r2" : n % 3 === 1 ? " r1" : "");
+  grille.className = "grille" + (n === 1 ? " seul" : n % 3 === 2 ? " r2" : n % 3 === 1 ? " r1" : "");
   grille.replaceChildren(...SITE.projets.map((p, i) => {
     const cadre = el("span", { class: "cadre suit" });
-    if (p.image) cadre.append(el("img", { src: p.image, alt: "", loading: "lazy" }));
-    else cadre.append(el("span", { class: "couverture", style: "--fx:" + (18 + (i * 41) % 64) + "%", "aria-hidden": "true", text: ROMAIN[i] || String(i + 1) }));
+    const chiffre = () => el("span", { class: "couverture", style: "--fx:" + (18 + (i * 41) % 64) + "%", "aria-hidden": "true", text: ROMAIN[i] || String(i + 1) });
+    // Vignette : l'image indiquée, sinon celle de la vidéo YouTube, sinon un chiffre lumineux
+    const m = media(p.video);
+    const source = p.image || (m && m.vignette);
+    if (source) {
+      const img = el("img", { src: source, alt: "", loading: "lazy" });
+      if (!p.image) {
+        const secours = () => {
+          if (img.dataset.secours) { img.replaceWith(chiffre()); return; }
+          img.dataset.secours = "1"; img.src = m.vignetteSecours;
+        };
+        img.addEventListener("error", secours);
+        img.addEventListener("load", () => { if (img.naturalWidth <= 120) secours(); });   // 120 px = image « vidéo introuvable » de YouTube
+      }
+      cadre.append(img);
+    } else cadre.append(chiffre());
     cadre.append(el("span", { class: "lire", "aria-hidden": "true", text: t(UI.lire) }));
     const carte = el("button", { class: "carte", type: "button", "data-type": cle(p.type) },
       cadre,
@@ -944,7 +932,7 @@ function rendre() {
   $$(".langue button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANG ? "true" : "false"));
   $("#dock").setAttribute("aria-label", t(UI.dock));
   clips.forEach((a, i) => { a.textContent = t(UI.clips[sections[i].id]) || sections[i].id; });
-  rendreShowreel(); rendreOutils(); rendreProjets(); rendreProfil(); rendreContact();
+  rendreOutils(); rendreProjets(); rendreProfil(); rendreContact();
 }
 $$(".langue button").forEach(b => b.addEventListener("click", () => {
   if (b.dataset.lang === LANG) return;
