@@ -226,7 +226,7 @@ main{position:relative;z-index:1}
 /* ---------- sections : titre au-dessus du contenu ---------- */
 .seq{position:relative;padding:clamp(84px,15vh,170px) var(--marge) 0}
 .titre{
-  width:fit-content;
+  width:fit-content;margin-inline:auto;text-align:center;
   font-family:var(--titre);font-weight:500;color:var(--acier);
   font-size:clamp(2.4rem,6.2vw,5rem);line-height:1.05;letter-spacing:-.03em;
   margin-bottom:.5em;text-shadow:var(--halo-titre);
@@ -247,7 +247,7 @@ main{position:relative;z-index:1}
   0%{-webkit-mask-position:100% 0;mask-position:100% 0}
   30%,100%{-webkit-mask-position:0% 0;mask-position:0% 0}
 }
-.sous-titre{font-size:1rem;font-weight:500;color:var(--gris);margin:clamp(44px,7vh,76px) 0 16px}
+.sous-titre{font-size:1rem;font-weight:500;color:var(--gris);text-align:center;margin:clamp(44px,7vh,76px) 0 16px}
 .sous-titre:first-child{margin-top:0}
 
 /* ---------- écran vidéo ---------- */
@@ -326,7 +326,7 @@ main{position:relative;z-index:1}
 }
 .outil-nom{display:block;font-weight:600;font-size:1.15rem;line-height:1.2;color:var(--blanc)}
 .outil-usage{display:block;color:var(--gris);font-size:.92rem;margin-top:2px}
-.puces{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.puces{list-style:none;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .puce{height:46px;padding:0 20px 0 14px;border-radius:999px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--trait);background:rgb(255 255 255 / .04);color:var(--blanc)}
 .ico{flex:none;width:20px;height:20px;display:grid;place-items:center;color:var(--givre);filter:drop-shadow(0 0 5px rgb(var(--l) / .7))}
 .ico svg{width:20px;height:20px}
@@ -338,6 +338,7 @@ main{position:relative;z-index:1}
 }
 
 /* ---------- contact ---------- */
+#contact .corps{display:flex;flex-direction:column;align-items:center;text-align:center}
 .appel{color:var(--texte);font-size:1.15rem;max-width:46ch;text-wrap:balance;margin-bottom:clamp(18px,3vw,30px)}
 .appel:empty{display:none}
 .mail{
@@ -346,7 +347,7 @@ main{position:relative;z-index:1}
   text-shadow:0 0 .2em rgb(var(--l) / .55),0 0 .8em rgb(var(--l) / .3);transition:text-shadow .3s;
 }
 .mail:hover{text-shadow:0 0 .08em #fff,0 0 .35em rgb(var(--l) / .95),0 0 1.3em rgb(var(--l) / .6)}
-.contact-actions,.liens{display:flex;flex-wrap:wrap;gap:12px}
+.contact-actions,.liens{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
 .contact-actions{margin-top:clamp(26px,4vw,46px)}
 .liens:empty{display:none}
 .pied{
@@ -606,7 +607,7 @@ const SITE = {
   // Pour une autre vignette, mets le nom d'une image (placée à côté de ce fichier) dans image.
   projets: [
     { titre: { fr: "Court-métrage", en: "Short film" }, client: "EICAR", annee: "2026",
-      type: { fr: "Court-métrage", en: "Short film" }, role: { fr: "Chef monteur", en: "Lead editor" }, image: "", video: "" },
+      type: { fr: "Court-métrage", en: "Short film" }, role: { fr: "Chef monteur", en: "Lead editor" }, image: "", video: "https://youtu.be/jxOdFFDVE_U" },
     { titre: "Flackle", client: "", annee: "",
       type: { fr: "Publicité", en: "Advertising" }, role: "", image: "", video: "https://youtu.be/j3vXWHo_tbQ" },
     { titre: "Wish", client: "", annee: "2026",
