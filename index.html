@@ -38,8 +38,8 @@
   --titre:"Unbounded","Geist","Helvetica Neue",Arial,sans-serif;
   --sans:"Geist","Helvetica Neue",Arial,sans-serif;
 
-  --halo-titre:0 0 .05em rgb(255 255 255 / .5),0 0 .32em rgb(var(--l) / .45),0 0 1em rgb(var(--l) / .26);
-  --acier:#d3daea;                     /* teinte du nom et des titres, juste sous le blanc pour que le reflet se voie */
+  --halo-titre:0 0 .05em rgb(255 255 255 / .35),0 0 .32em rgb(var(--l) / .4),0 0 1em rgb(var(--l) / .24);
+  --acier:#bfc7da;                     /* teinte du nom et des titres, juste sous le blanc pour que le reflet se voie */
   --halo:0 0 .05em rgb(255 255 255 / .95),0 0 .22em rgb(var(--l) / .7),0 0 .7em rgb(var(--l) / .42),0 0 1.8em rgb(var(--l) / .24);
   --marge:clamp(16px,4.5vw,64px);
   --dock:58px;
@@ -237,9 +237,9 @@ main{position:relative;z-index:1}
 .brille::after{
   content:attr(data-texte);content:attr(data-texte) / "";
   position:absolute;inset:-.4em;padding:.4em;pointer-events:none;
-  color:var(--blanc);text-shadow:0 0 .08em #fff,0 0 .3em rgb(var(--l) / .9);
-  -webkit-mask:linear-gradient(105deg,transparent 41%,#000 50%,transparent 59%) 100% 0 / 300% 100% no-repeat;
-          mask:linear-gradient(105deg,transparent 41%,#000 50%,transparent 59%) 100% 0 / 300% 100% no-repeat;
+  color:var(--blanc);text-shadow:0 0 .05em #fff,0 0 .22em #fff,0 0 .6em rgb(var(--l) / .95);
+  -webkit-mask:linear-gradient(105deg,transparent 45.5%,#000 49%,#000 51%,transparent 54.5%) 100% 0 / 300% 100% no-repeat;
+          mask:linear-gradient(105deg,transparent 45.5%,#000 49%,#000 51%,transparent 54.5%) 100% 0 / 300% 100% no-repeat;
   animation:reflet 6s cubic-bezier(.45,0,.2,1) infinite;
 }
 .nom.brille::after{animation-delay:1.9s}
